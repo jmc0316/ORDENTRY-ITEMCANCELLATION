@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Entry</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 700px;">
+      <div class="card-body">
+        <h4 class="text-center fw-bold mb-4">Order Entry</h4>
+
+        <form id="orderForm">
+          <div class="mb-3">
+            <label class="form-label">Product Code</label>
+            <input type="text" class="form-control" id="productCode" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="productName" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Unit Price</label>
+            <input type="number" class="form-control" id="unitPrice" required>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Add to Order</button>
+          </div>
+        </form>
+
+        <table class="table table-bordered mt-4" id="orderTable">
+          <thead class="table-light">
+            <tr>
+              <th>Prod Code</th>
+              <th>Prod Name</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('orderForm');
+    const tableBody = document.querySelector('#orderTable tbody');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const code = document.getElementById('productCode').value;
+      const name = document.getElementById('productName').value;
+      const qty = document.getElementById('quantity').value;
+      const price = document.getElementById('unitPrice').value;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${code}</td>
+        <td>${name}</td>
+        <td>${qty}</td>
+        <td>${price}</td>
+        <td><button class="btn btn-sm btn-danger remove-btn">Remove</button></td>
+      `;
+
+      // Add event for the remove button
+      row.querySelector('.remove-btn').addEventListener('click', function() {
+        row.remove();
+      });
+
+      tableBody.appendChild(row);
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

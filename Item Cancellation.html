@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Item Cancellation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 500px;">
+      <div class="card-body">
+        <h4 class="text-center fw-bold mb-4">Item Cancellation</h4>
+
+        <form id="cancelForm">
+          <div class="mb-3">
+            <label class="form-label">Select Item</label>
+            <select class="form-select" id="itemSelect" required>
+              <option value="">-- Choose Item --</option>
+              <option value="Item 001">Item 001</option>
+              <option value="Item 002">Item 002</option>
+              <option value="Item 003">Item 003</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Admin Username</label>
+            <input type="text" class="form-control" id="adminUser" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Admin Password</label>
+            <input type="password" class="form-control" id="adminPass" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" id="cancelDate" required>
+          </div>
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+            <button class="btn btn-primary" type="submit">Confirm</button>
+            <button class="btn btn-secondary" type="reset">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cancelForm = document.getElementById('cancelForm');
+
+    cancelForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const item = document.getElementById('itemSelect').value;
+      const user = document.getElementById('adminUser').value;
+      const pass = document.getElementById('adminPass').value;
+      const date = document.getElementById('cancelDate').value;
+
+      if (item && user && pass && date) {
+        alert(`Item "${item}" cancelled successfully on ${date} by ${user}.`);
+        cancelForm.reset();
+      } else {
+        alert("Please fill out all fields.");
+      }
+    });
+  </script>
+
+</body>
+</html>
